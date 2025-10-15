@@ -1,0 +1,86 @@
+{
+  "$id": "https://tamga-guard.github.io/tamga-contracts/contracts/ct-only.v2.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tamga Collector CT-only v2",
+  "type": "object",
+  "required": ["schema.version", "collector.source", "time.source", "source.fqdn"],
+  "properties": {
+    "schema.version": { "type": "string", "const": "ct-only.v2" },
+    "event_type": { "type": "string" },
+    "collector.source": { "type": "string" },
+    "collector.ingest_id": { "type": "string" },
+    "time.source": { "type": "string", "format": "date-time" },
+    "time.observation": { "type": ["string", "null"], "format": "date-time" },
+
+    "ct.log.name": { "type": ["string", "null"] },
+    "ct.log.id": { "type": ["string", "null"] },
+    "ct.log.index": { "type": ["integer", "null"] },
+    "ct.entry_type": { "type": ["string", "null"], "enum": ["cert", "precert", null] },
+    "ct.timestamp": { "type": ["string", "null"], "format": "date-time" },
+
+    "certificate.subject": { "type": ["string", "null"] },
+    "certificate.subject_cn": { "type": ["string", "null"] },
+    "certificate.issuer_org": { "type": ["string", "null"] },
+    "certificate.issuer_cn": { "type": ["string", "null"] },
+    "certificate.not_before": { "type": ["string", "null"], "format": "date-time" },
+    "certificate.not_after": { "type": ["string", "null"], "format": "date-time" },
+    "certificate.valid_days": { "type": ["integer", "null"] },
+    "certificate.sig_alg": { "type": ["string", "null"] },
+    "certificate.public_key.type": { "type": ["string", "null"] },
+    "certificate.public_key.bits_or_curve": { "type": ["string", "null"] },
+    "certificate.fingerprint_sha256": { "type": ["string", "null"] },
+    "certificate.sct_count": { "type": ["integer", "null"] },
+    "certificate.san_hosts": { "type": "array", "items": { "type": "string" } },
+
+    "source.fqdn": { "type": "string" },
+    "source.domain": { "type": ["string", "null"] },
+    "source.tld": { "type": ["string", "null"] },
+
+    "tokens.all": { "type": "array", "items": { "type": "string" } },
+    "tokens.ascii_only": { "type": ["boolean", "null"] },
+    "tokens.brand_like": { "type": "array", "items": { "type": "string" } },
+
+    "brand.hits": { "type": "array", "items": { "type": "string" } },
+    "brand.token_hits": { "type": "array", "items": { "type": "string" } },
+    "brand.distance.min": { "type": ["integer", "null"] },
+
+    "lexical.sld": { "type": ["string", "null"] },
+    "lexical.length": { "type": ["integer", "null"] },
+    "lexical.hyphen_count": { "type": ["integer", "null"] },
+    "lexical.digit_count": { "type": ["integer", "null"] },
+    "lexical.digit_ratio": { "type": ["number", "null"] },
+    "lexical.vowel_ratio": { "type": ["number", "null"] },
+    "lexical.repeated_max_run": { "type": ["integer", "null"] },
+    "lexical.shannon_entropy": { "type": ["number", "null"] },
+    "lexical.ngram_oddity": { "type": ["number", "null"] },
+
+    "idn.is_punycode": { "type": ["boolean", "null"] },
+    "idn.homograph_hint": { "type": ["boolean", "null"] },
+    "idn.scripts": { "type": "array", "items": { "type": "string" } },
+
+    "i18n.locale_hint": { "type": ["string", "null"] },
+
+    "tld.suspicious_hint": { "type": ["boolean", "null"] },
+    "wildcard_pair_san2": { "type": ["boolean", "null"] },
+
+    "heuristics.rules_fired": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "score"],
+        "properties": {
+          "id": { "type": "string" },
+          "score": { "type": "number" }
+        },
+        "additionalProperties": true
+      }
+    },
+
+    "score.ct_stage": { "type": ["number", "null"] },
+    "classification.taxonomy": { "type": ["string", "null"] },
+    "classification.type": { "type": ["string", "null"] },
+
+    "route.next": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}
