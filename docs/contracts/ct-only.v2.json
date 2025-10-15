@@ -83,4 +83,4 @@
     "route.next": { "type": "array", "items": { "type": "string" } }
   },
   "additionalProperties": true
-}
+} 
