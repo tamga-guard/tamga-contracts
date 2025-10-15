@@ -1,1 +1,24 @@
 
+{
+  "idempotency_key": "tg_2025_003_c91e7b",
+  "state": "CRITICAL",
+  "host": "secure-marino-payments.io",
+  "labels": ["brand-marino", "payments", "phishing"],
+  "google": { "position": 2, "ts_utc": "2025-10-15T15:12:30Z" },
+  "probe": {
+    "status": 200,
+    "tls_issuer": "R3",
+    "title": "Marino Pay Portal"
+  },
+  "whois": {
+    "created": "2025-10-12",
+    "registrar": "NameSRS",
+    "country": "SE"
+  },
+  "risk_flags": ["domain-fresh", "keyword-pay", "brand-match", "https-valid"],
+  "evidence": [
+    { "type": "screenshot", "uri": "evidence://screens/c91e7b.png", "hash": "sha256:0123abcd..." },
+    { "type": "headers", "uri": "evidence://headers/c91e7b.txt" }
+  ],
+  "ts_utc": "2025-10-15T15:12:30Z"
+}
