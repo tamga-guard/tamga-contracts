@@ -9,3 +9,4 @@ Early-warning brand protection — JSON contracts & samples.
   - [`sample_event_2.json`](samples/sample_event_2.json)
 
 > Versioning: `v1.x` backward-compatible; breaking changes will bump to `v2`.
+[← Back to Org Home](https://tamga-guard.github.io)
