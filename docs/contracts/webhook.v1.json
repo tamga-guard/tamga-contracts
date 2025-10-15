@@ -1,1 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tamga-guard.github.io/tamga-contracts/contracts/webhook.v1.json",
+  "title": "Tamga Webhook v1",
+  "type": "object",
+  "required": ["type", "version", "delivery_id", "delivered_at", "data"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["event.created", "event.updated", "event.escalated", "event.archived"]
+    },
+    "version": { "type": "string", "const": "v1" },
+    "delivery_id": { "type": "string", "minLength": 12 },
+    "attempt": { "type": "integer", "minimum": 1, "default": 1 },
+    "delivered_at": { "type": "string", "format": "date-time" },
 
+    "signature": {
+      "type": "object",
+      "description": "HMAC imzası (header ile aynıdır)",
+      "required": ["alg", "hash", "key_id"],
+      "properties": {
+        "alg": { "type": "string", "enum": ["HMAC-SHA256"] },
+        "hash": { "type": "string", "description": "hex-encoded HMAC(body)" },
+        "key_id": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+
+    "data": {
+      "type": "object",
+      "required": ["event"],
+      "properties": {
+        "event": { "$ref": "https://tamga-guard.github.io/tamga-contracts/contracts/event.v1.json" },
+        "evidence_manifest": {
+          "type": ["object", "null"],
+          "$ref": "https://tamga-guard.github.io/tamga-contracts/contracts/evidence.v1.json"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "type": "event.escalated",
+      "version": "v1",
+      "delivery_id": "wh_2025_10_15_00042",
+      "attempt": 1,
+      "delivered_at": "2025-10-15T14:06:55Z",
+      "signature": { "alg": "HMAC-SHA256", "hash": "cafe…deadbeef", "key_id": "cust_main" },
+      "data": {
+        "event": { "$ref": "event.v1.json#/$defs/example_event_1" }
+      }
+    }
+  ]
+}
