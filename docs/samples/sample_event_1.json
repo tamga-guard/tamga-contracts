@@ -1,0 +1,14 @@
+{
+  "idempotency_key": "tg_2025_001_7a9c12",
+  "state": "WATCH",
+  "host": "login-marino-secure.com",
+  "labels": ["phishing", "brand-marino"],
+  "google": { "position": 7, "ts_utc": "2025-10-15T13:22:04Z" },
+  "probe": { "status": 200, "tls_issuer": "R3", "title": "Marino Login" },
+  "whois": { "created": "2025-10-10", "registrar": "Namecheap", "country": "PA" },
+  "risk_flags": ["domain-fresh", "keyword-login", "brand-match"],
+  "evidence": [
+    { "type": "screenshot", "uri": "evidence://screens/7a9c12.png", "hash": "sha256:abc..." }
+  ],
+  "ts_utc": "2025-10-15T13:22:04Z"
+}
