@@ -1,1 +1,52 @@
 
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tamga-guard.github.io/tamga-contracts/contracts/evidence.v1.json",
+  "title": "Tamga Evidence Manifest v1",
+  "type": "object",
+  "required": ["bundle_id", "event_idempotency_key", "items", "created_at"],
+  "properties": {
+    "bundle_id": { "type": "string", "minLength": 8 },
+    "event_idempotency_key": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "signing": {
+      "type": "object",
+      "required": ["alg"],
+      "properties": {
+        "alg": { "type": "string", "enum": ["none", "ed25519"] },
+        "public_key": { "type": ["string", "null"] },
+        "signature": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type", "uri"],
+        "properties": {
+          "type": { "type": "string", "enum": ["screenshot", "html", "headers", "pcap", "pdf", "text"] },
+          "uri": { "type": "string", "description": "where to fetch (s3://, https://, evidence://…)" },
+          "hash": { "type": ["string", "null"], "description": "sha256:… (optional)" },
+          "bytes": { "type": ["integer", "null"] },
+          "notes": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "bundle_id": "tg_bundle_7a9c12",
+      "event_idempotency_key": "tg_2025_001_7a9c12",
+      "created_at": "2025-10-15T13:23:10Z",
+      "signing": { "alg": "none", "public_key": null, "signature": null },
+      "items": [
+        { "type": "screenshot", "uri": "evidence://screens/7a9c12.png", "hash": "sha256:abc…", "bytes": 183244 },
+        { "type": "headers", "uri": "evidence://headers/7a9c12.txt" }
+      ]
+    }
+  ]
+}
