@@ -8,7 +8,11 @@
   "whois": { "created": "2025-09-29", "registrar": "Dynadot", "country": "US" },
   "risk_flags": ["tld-generic", "redirect-chain"],
   "evidence": [
-    { "type": "html", "uri": "evidence://html/b3f441.html", "hash": "sha256:def..." },
+    {
+      "type": "html",
+      "uri": "evidence://html/b3f441.html",
+      "hash": "sha256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+    },
     { "type": "headers", "uri": "evidence://headers/b3f441.txt" }
   ],
   "ts_utc": "2025-10-15T14:05:11Z"
