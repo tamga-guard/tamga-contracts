@@ -1,0 +1,23 @@
+{
+  "idempotency_key": "tg_2025_004_7ab3de",
+  "state": "RISING",
+  "host": "update-marino-billing.app",
+  "labels": ["brand-marino", "billing", "update"],
+  "google": { "position": 5, "ts_utc": "2025-10-16T09:41:00Z" },
+  "probe": {
+    "status": 302,
+    "tls_issuer": "R3",
+    "title": "Marino Billing Center"
+  },
+  "whois": {
+    "created": "2025-10-10",
+    "registrar": "Gandi",
+    "country": "FR"
+  },
+  "risk_flags": ["keyword-billing", "redirect-chain", "brand-match"],
+  "evidence": [
+    { "type": "screenshot", "uri": "evidence://screens/7ab3de.png", "hash": "sha256:aa11bb22..." },
+    { "type": "headers", "uri": "evidence://headers/7ab3de.txt" }
+  ],
+  "ts_utc": "2025-10-16T09:41:00Z"
+}
