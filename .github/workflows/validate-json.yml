@@ -20,7 +20,8 @@ jobs:
         with:
           node-version: '20'
 
-      - run: npm i -g ajv-cli
+      # Ajv CLI ve format eklentisi
+      - run: npm i -g ajv-cli ajv-formats
 
       - name: Validate samples against event.v1.json
         shell: bash
@@ -28,8 +29,8 @@ jobs:
           set -euo pipefail
           shopt -s nullglob
 
-          echo "Compile event schema (draft2020)"
-          npx ajv compile --spec=draft2020 -s docs/contracts/event.v1.json
+          echo "Compile event schema (draft2020 + formats)"
+          npx ajv compile --spec=draft2020 -c ajv-formats -s docs/contracts/event.v1.json
 
           echo "Validate each sample_event_*.json"
           files=(docs/samples/sample_event_*.json)
@@ -38,7 +39,7 @@ jobs:
           else
             for f in "${files[@]}"; do
               echo "Validating $f"
-              npx ajv validate --spec=draft2020 -s docs/contracts/event.v1.json -d "$f"
+              npx ajv validate --spec=draft2020 -c ajv-formats -s docs/contracts/event.v1.json -d "$f"
             done
           fi
 
@@ -49,8 +50,8 @@ jobs:
           shopt -s nullglob
 
           if [ -f docs/contracts/ct-only.v2.json ]; then
-            echo "Compile ct-only schema (draft2020)"
-            npx ajv compile --spec=draft2020 -s docs/contracts/ct-only.v2.json
+            echo "Compile ct-only schema (draft2020 + formats)"
+            npx ajv compile --spec=draft2020 -c ajv-formats -s docs/contracts/ct-only.v2.json
 
             ctfiles=(docs/samples/ct_only_*.json)
             if (( ${#ctfiles[@]} == 0 )); then
@@ -58,7 +59,7 @@ jobs:
             else
               for f in "${ctfiles[@]}"; do
                 echo "Validating $f"
-                npx ajv validate --spec=draft2020 -s docs/contracts/ct-only.v2.json -d "$f"
+                npx ajv validate --spec=draft2020 -c ajv-formats -s docs/contracts/ct-only.v2.json -d "$f"
               done
             fi
           else
