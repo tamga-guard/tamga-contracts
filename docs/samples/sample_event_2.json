@@ -1,1 +1,15 @@
-
+{
+  "idempotency_key": "tg_2025_002_b3f441",
+  "state": "RISING",
+  "host": "support-marino-helpdesk.net",
+  "labels": ["support-scam", "brand-marino"],
+  "google": { "position": 3, "ts_utc": "2025-10-15T14:05:11Z" },
+  "probe": { "status": 302, "redirects": ["hxxps://t.co/x"], "title": "Support Center" },
+  "whois": { "created": "2025-09-29", "registrar": "Dynadot", "country": "US" },
+  "risk_flags": ["tld-generic", "redirect-chain"],
+  "evidence": [
+    { "type": "html", "uri": "evidence://html/b3f441.html", "hash": "sha256:def..." },
+    { "type": "headers", "uri": "evidence://headers/b3f441.txt" }
+  ],
+  "ts_utc": "2025-10-15T14:05:11Z"
+}
