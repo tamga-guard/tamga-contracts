@@ -16,8 +16,15 @@
   },
   "risk_flags": ["keyword-billing", "redirect-chain", "brand-match"],
   "evidence": [
-    { "type": "screenshot", "uri": "evidence://screens/7ab3de.png", "hash": "sha256:aa11bb22..." },
-    { "type": "headers", "uri": "evidence://headers/7ab3de.txt" }
+    {
+      "type": "screenshot",
+      "uri": "evidence://screens/7ab3de.png",
+      "hash": "sha256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+    },
+    {
+      "type": "headers",
+      "uri": "evidence://headers/7ab3de.txt"
+    }
   ],
   "ts_utc": "2025-10-16T09:41:00Z"
 }
