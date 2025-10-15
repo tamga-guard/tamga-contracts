@@ -1,20 +1,69 @@
 name: Validate JSON
+
 on:
   push:
     paths:
       - 'docs/**/*.json'
+      - '.github/workflows/validate-json.yml'
   pull_request:
     paths:
       - 'docs/**/*.json'
+      - '.github/workflows/validate-json.yml'
+
 jobs:
   ajv:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+      # Ajv CLI (güvenli olması için npx kullanacağız ama global de dursun)
       - run: npm i -g ajv-cli
-      - name: Validate samples against event schema
+
+      - name: Validate samples against event.v1.json
+        shell: bash
         run: |
-          ajv validate -s docs/contracts/event.v1.json -d docs/samples/*.json
+          set -euo pipefail
+          shopt -s nullglob
+
+          echo "Compile event schema"
+          npx ajv compile -s docs/contracts/event.v1.json
+
+          echo "Validate each sample_event_*.json"
+          files=(docs/samples/sample_event_*.json)
+          if (( ${#files[@]} == 0 )); then
+            echo "No sample_event_*.json files found; skipping."
+          else
+            for f in "${files[@]}"; do
+              echo "Validating $f"
+              npx ajv validate -s docs/contracts/event.v1.json -d "$f"
+            done
+          fi
+
+      # (İsteğe bağlı) ct-only şema + örnekleri de doğrula
+      - name: Validate ct-only samples (if present)
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+
+          if [ -f docs/contracts/ct-only.v2.json ]; then
+            echo "Compile ct-only schema"
+            npx ajv compile -s docs/contracts/ct-only.v2.json
+
+            echo "Validate each ct_only_*.json"
+            ctfiles=(docs/samples/ct_only_*.json)
+            if (( ${#ctfiles[@]} == 0 )); then
+              echo "No ct_only_*.json files found; skipping."
+            else
+              for f in "${ctfiles[@]}"; do
+                echo "Validating $f"
+                npx ajv validate -s docs/contracts/ct-only.v2.json -d "$f"
+              done
+            fi
+          else
+            echo "ct-only.v2.json not found; skipping ct-only validation."
+          fi
