@@ -1,0 +1,20 @@
+name: Validate JSON
+on:
+  push:
+    paths:
+      - 'docs/**/*.json'
+  pull_request:
+    paths:
+      - 'docs/**/*.json'
+jobs:
+  ajv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm i -g ajv-cli
+      - name: Validate samples against event schema
+        run: |
+          ajv validate -s docs/contracts/event.v1.json -d docs/samples/*.json
