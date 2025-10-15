@@ -11,6 +11,8 @@ Early-warning brand protection — JSON contracts & samples.
   - [`sample_event_1.json`](samples/sample_event_1.json)
   - [`sample_event_2.json`](samples/sample_event_2.json)
   - [`sample_event_3.json`](samples/sample_event_3.json)
+  - [`sample_event_4.json`](samples/sample_event_4.json)
+
 
 
 > Versioning: `v1.x` backward-compatible; breaking changes will bump to `v2`.
