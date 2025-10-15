@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: '20'
 
-      # Ajv CLI ve format eklentisi
+      # Ajv CLI + date-time vb. formatlar
       - run: npm i -g ajv-cli ajv-formats
 
       - name: Validate samples against event.v1.json
