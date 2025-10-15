@@ -7,7 +7,7 @@ Early-warning brand protection — JSON contracts & samples.
   - [`webhook.v1.json`](contracts/webhook.v1.json)
   - [`evidence.v1.json`](contracts/evidence.v1.json)
   - [`ct-only.v2.json`](contracts/ct-only.v2.json)
-  - 
+    
 
 - [samples/](samples/) — masked example events
   - [`sample_event_1.json`](samples/sample_event_1.json)
