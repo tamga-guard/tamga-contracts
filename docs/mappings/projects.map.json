@@ -1,1 +1,14 @@
+{
+  "betmarino": {
+    "project_id": "betmarino",
+    "patterns": [
+      "(^|\\.)betmarino\\.",
+      "marino\\.bet$"
+    ]
+  }
+
+  /* Yeni müşteriler buraya eklenir:
+  "brandX": { "project_id": "brandX", "patterns": ["(^|\\.)brandx\\.", "brandx\\.com$"] }
+  */
+}
 
